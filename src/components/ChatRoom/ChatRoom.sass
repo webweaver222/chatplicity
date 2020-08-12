@@ -1,0 +1,67 @@
+.chat-room
+    margin: auto
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    .header
+        height: 9.7vh
+        background-color: black
+        h2
+            font-family: karala
+            font-size: 18px
+            color: #fff
+            letter-spacing: 1px
+            margin-top: 35px
+            text-align: center
+    .footer
+        height: 8.2vh
+        background-color: black
+        display: flex
+        padding: 0 30px
+        align-items: center
+        position: relative
+        i
+            color: darken(#fff, 10%)
+            cursor: pointer
+            &:hover
+                color: darken(#fff, 15%)
+        .send
+            position: absolute
+            z-index: 8
+            right: 30px
+            top: -30px
+            width: 60px
+            height: 60px
+            border-radius: 50%
+            background-color: #ffbdb8
+            transition: .5s ease
+            cursor: pointer
+            img
+                position: absolute
+                margin: 50%
+                transform: translate(-45%, -50%)
+            &:hover
+                background-color: darken(#ffbdb8, 5%)  
+        input
+            background-color: black
+            border: none
+            color: #fff
+            margin-left: 20px
+            width: 60%
+            letter-spacing: 2px
+            &:focus
+                outline: none
+    .main
+        flex: 1
+        background-color: #fff
+        position: relative
+        .bgc-top
+            position: absolute
+            z-index: 5
+            top: 0
+            background: url(../../resources/img/bg-top.png)  no-repeat
+            background-position: top
+            background-size: cover
+            width: 100%
+            height: 100%

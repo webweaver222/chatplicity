@@ -4,12 +4,13 @@ import "./app.sass";
 
 //import Preloader from '../preloader'
 
-import LoginContainer from "../login";
+import Login from "../login";
+import ChatRoom from "../ChatRoom";
 
 const App = () => {
   return (
     <div className="app">
-      <LoginContainer />
+      <ChatRoom />
     </div>
   );
 };

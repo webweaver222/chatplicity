@@ -1,13 +1,23 @@
 @font-face 
     font-family: oxygen
     src: url('./fonts/Oxygen-Light.ttf')
+@font-fact
+    font-family: karala-bold
+    src: url('./fonts/Karla-Bold.ttf')
+@font-fact
+    font-family: karala
+    src: url('./fonts/Karla-Regular.ttf')
     
 html, body
     height: 100%
     font-family: oxygen
     #root
-        height: 100%
+        display: flex
         color: green
+        background-color: #ccc
+        overflow: auto
+        height: initial
+        min-height: 100%
         button
             padding: 5px 10px
             font-size: 16px

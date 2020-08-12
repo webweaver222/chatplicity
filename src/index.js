@@ -7,6 +7,8 @@ import "./resources/vars.sass";
 import "./resources/reset.sass";
 import "./resources/main.sass";
 import "./resources/media.sass";
+import "../src/resources/fonts/solid.min.css";
+import "./resources/fonts/fontawesome.min.css";
 
 import ErrorBoundry from "./components/error-boundry";
 import { ServiceProvider } from "./components/service-provider";

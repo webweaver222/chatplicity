@@ -50,7 +50,7 @@ module.exports = (env = {}) => {
         },
         //loading images
         {
-          test: /\.(png|jpg|gif|ico|jpeg)$/,
+          test: /\.(png|jpg|gif|ico|jpeg|svg)$/,
           use: [
             {
               loader: "file-loader",
@@ -63,7 +63,7 @@ module.exports = (env = {}) => {
         },
         // loading fonts
         {
-          test: /\.(ttf|otf|eof|woff|woff2)$/,
+          test: /\.(ttf|otf|eof|woff|woff2|eot)$/,
           use: [
             {
               loader: "file-loader",
