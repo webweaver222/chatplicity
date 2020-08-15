@@ -19,6 +19,26 @@ const reducer = (state, action) => {
   }
 
   switch (action.type) {
+    case "ENTER_CHAT": {
+      if (action.payload) {
+        return {
+          ...state,
+          currentUser: action.payload
+        };
+      }
+      return {
+        ...state,
+        currentUser: state.username
+      };
+    }
+
+    case "LOGOUT": {
+      return {
+        ...state,
+        currentUser: null
+      };
+    }
+
     case "CHANGE_USERNAME": {
       return {
         ...state,
@@ -48,14 +68,17 @@ const reducer = (state, action) => {
     }
 
     case "POST_MESSAGE": {
-      const newMessage = {
-        body: state.message,
-        user: state.currentUser
-      };
       return {
         ...state,
-        chat: addMessage(newMessage, state.chat),
+        chat: addMessage(action.payload, state.chat),
         message: ""
+      };
+    }
+
+    case "LOAD_POSTS": {
+      return {
+        ...state,
+        chat: action.payload
       };
     }
 

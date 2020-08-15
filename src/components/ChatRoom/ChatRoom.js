@@ -1,13 +1,27 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 import { connect } from "react-redux";
 import { useDidMountEffect } from "../customHooks/didMountEffect";
+import { logout, post, try_login } from "../../actions";
 import "./ChatRoom.sass";
 
 import arrow from "../../resources/img/arrow.png";
 
-const ChatRoom = ({ list, message, onChangeMessage, onPost, onClear }) => {
+const ChatRoom = ({
+  list,
+  message,
+  currentUser,
+  onChangeMessage,
+  onPost,
+  onClear,
+  onExit,
+  mount
+}) => {
   const chat = useRef(null);
+
+  useEffect(() => {
+    mount();
+  }, []);
 
   useDidMountEffect(() => {
     chat.current.scrollTop = chat.current.scrollHeight;
@@ -16,9 +30,11 @@ const ChatRoom = ({ list, message, onChangeMessage, onPost, onClear }) => {
   const renderList = () => {
     return list.map((item, i) => {
       return (
-        <li key={i} className={item.user === "kemer" ? "user-item" : null}>
+        <li key={i} className={item.user === currentUser ? "user-item" : null}>
           <p>{item.body}</p>
-          <span style={item.user === "kemer" ? { textAlign: "right" } : null}>
+          <span
+            style={item.user === currentUser ? { textAlign: "right" } : null}
+          >
             {item.user}
           </span>
         </li>
@@ -29,6 +45,7 @@ const ChatRoom = ({ list, message, onChangeMessage, onPost, onClear }) => {
   return (
     <div className="chat-room">
       <div className="header">
+        <i className="fas fa-caret-left" onClick={onExit}></i>
         <h2>Testing Task</h2>
       </div>
       <div
@@ -55,15 +72,18 @@ const ChatRoom = ({ list, message, onChangeMessage, onPost, onClear }) => {
   );
 };
 
-const mapStateToProps = ({ chat, message }) => ({
+const mapStateToProps = ({ chat, message, currentUser }) => ({
   list: chat,
-  message
+  message,
+  currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
   onChangeMessage: text => dispatch({ type: "CHANGE_MESSAGE", payload: text }),
-  onPost: () => dispatch("POST_MESSAGE"),
-  onClear: () => dispatch("CLEAR_MESSAGE")
+  onPost: () => dispatch(post()),
+  onClear: () => dispatch("CLEAR_MESSAGE"),
+  onExit: () => dispatch(logout()),
+  mount: () => dispatch(try_login())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoom);

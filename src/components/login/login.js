@@ -5,8 +5,9 @@ import "./login.sass";
 
 import Preloader from "../preloader";
 import SadFace from "../../resources/svg/sad-face.html";
+import { enter } from "../../actions";
 
-const Login = ({}) => {
+const Login = ({ username, onNameChange, onEnter }) => {
   //const preloader = login_fetching ? <Preloader /> : null;
 
   return (
@@ -22,7 +23,12 @@ const Login = ({}) => {
           <div className="body">
             <div className="field">
               <label htmlFor="name-input">Username</label>
-              <input id="name-input" type="text" />
+              <input
+                id="name-input"
+                type="text"
+                value={username}
+                onChange={e => onNameChange(e.target.value)}
+              />
             </div>
             <div className="field">
               <label htmlFor="pass-input">Password</label>
@@ -30,7 +36,7 @@ const Login = ({}) => {
             </div>
           </div>
           <div className="footer">
-            <span>Get Started</span>
+            <span onClick={onEnter}>Get Started</span>
           </div>
         </div>
       </div>
@@ -38,6 +44,15 @@ const Login = ({}) => {
   );
 };
 
-export default connect(() => {
-  return {};
-}, null)(Login);
+export default connect(
+  ({ username }) => {
+    return { username };
+  },
+  dispatch => {
+    return {
+      onNameChange: text =>
+        dispatch({ type: "CHANGE_USERNAME", payload: text }),
+      onEnter: () => dispatch(enter())
+    };
+  }
+)(Login);
